@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <title>Pawn Shop Management System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏪 Pawn Shop Management System</h1>
+            <div class="header-actions">
+                <button id="syncButton" class="btn-sync" onclick="syncFromGitHub()" style="display: none;">🔄 Sync</button>
+                <button class="btn-settings" onclick="openGitHubSettings()">⚙️ Settings</button>
+            </div>
+            <nav>
+                <button class="nav-btn active" data-section="customers">Customers</button>
+                <button class="nav-btn" data-section="loans">Loans</button>
+                <button class="nav-btn" data-section="payments">Payments</button>
+                <button class="nav-btn" data-section="reports">Reports</button>
+            </nav>
+        </header>
+
+        <!-- Customers Section -->
+        <section id="customers" class="section active">
+            <div class="section-header">
+                <h2>Customer Management</h2>
+                <button class="btn btn-primary" onclick="openCustomerModal()">+ Add Customer</button>
+            </div>
+            <div class="table-container">
+                <table id="customersTable">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Mobile</th>
+                            <th>Address</th>
+                            <th>Aadhar</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="customersTableBody">
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Loans Section -->
+        <section id="loans" class="section">
+            <div class="section-header">
+                <h2>Loan Management</h2>
+                <button class="btn btn-primary" onclick="openLoanModal()">+ Add Loan</button>
+            </div>
+            <div class="table-container">
+                <table id="loansTable">
+                    <thead>
+                        <tr>
+                            <th>Bill No</th>
+                            <th>Customer</th>
+                            <th>Type</th>
+                            <th>Ornament (g)</th>
+                            <th>Principal</th>
+                            <th>Start Date</th>
+                            <th>Outstanding</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="loansTableBody">
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Payments Section -->
+        <section id="payments" class="section">
+            <div class="section-header">
+                <h2>Payment Management</h2>
+                <button class="btn btn-primary" onclick="openPaymentModal()">+ Add Payment</button>
+            </div>
+            <div class="table-container">
+                <table id="paymentsTable">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Loan (Bill No)</th>
+                            <th>Customer</th>
+                            <th>Amount</th>
+                            <th>Type</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="paymentsTableBody">
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Reports Section -->
+        <section id="reports" class="section">
+            <div class="section-header">
+                <h2>Loan Reports & Interest History</h2>
+            </div>
+            <div class="report-controls">
+                <select id="reportLoanSelect" onchange="loadLoanReport()">
+                    <option value="">Select a Loan</option>
+                </select>
+            </div>
+            <div id="loanReport" class="loan-report"></div>
+        </section>
+
+        <!-- Customer Modal -->
+        <div id="customerModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeCustomerModal()">&times;</span>
+                <h2 id="customerModalTitle">Add Customer</h2>
+                <form id="customerForm" onsubmit="saveCustomer(event)">
+                    <input type="hidden" id="customerId">
+                    <div class="form-group">
+                        <label>Name *</label>
+                        <input type="text" id="customerName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Mobile Number *</label>
+                        <input type="tel" id="customerMobile" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Address *</label>
+                        <textarea id="customerAddress" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Aadhar Card Number *</label>
+                        <input type="text" id="customerAadhar" required maxlength="12">
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="closeCustomerModal()">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Loan Modal -->
+        <div id="loanModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeLoanModal()">&times;</span>
+                <h2 id="loanModalTitle">Add Loan</h2>
+                <form id="loanForm" onsubmit="saveLoan(event)">
+                    <input type="hidden" id="loanId">
+                    <div class="form-group">
+                        <label>Customer *</label>
+                        <select id="loanCustomer" required></select>
+                    </div>
+                    <div class="form-group">
+                        <label>Bill Number *</label>
+                        <input type="text" id="loanBillNo" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Loan Type *</label>
+                        <select id="loanType" required>
+                            <option value="">Select Type</option>
+                            <option value="gold">Gold (2% per month)</option>
+                            <option value="silver">Silver (3% per month)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Ornament Details (grams) *</label>
+                        <input type="number" id="loanOrnament" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Principal Amount (₹) *</label>
+                        <input type="number" id="loanPrincipal" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Start Date *</label>
+                        <input type="date" id="loanStartDate" required>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="closeLoanModal()">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Payment Modal -->
+        <div id="paymentModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closePaymentModal()">&times;</span>
+                <h2 id="paymentModalTitle">Add Payment</h2>
+                <form id="paymentForm" onsubmit="savePayment(event)">
+                    <input type="hidden" id="paymentId">
+                    <div class="form-group">
+                        <label>Loan (Bill No) *</label>
+                        <select id="paymentLoan" required onchange="updateLoanDetails()"></select>
+                    </div>
+                    <div class="form-group">
+                        <label>Payment Date *</label>
+                        <input type="date" id="paymentDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Payment Type *</label>
+                        <select id="paymentType" required>
+                            <option value="">Select Type</option>
+                            <option value="interest">Interest Only</option>
+                            <option value="principal">Principal</option>
+                            <option value="full">Full Payment</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Amount (₹) *</label>
+                        <input type="number" id="paymentAmount" step="0.01" required>
+                    </div>
+                    <div id="loanInfo" class="loan-info"></div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="closePaymentModal()">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- GitHub Settings Modal -->
+        <div id="githubSettingsModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeGitHubSettings()">&times;</span>
+                <h2>⚙️ Storage Settings</h2>
+                <form id="githubSettingsForm" onsubmit="saveGitHubSettings(event)">
+                    <div class="form-group">
+                        <label>Storage Mode *</label>
+                        <select id="storageMode" onchange="updateStorageModeUI()" required>
+                            <option value="local">Local Storage (Browser Only)</option>
+                            <option value="github">GitHub Storage (Sync Across Devices)</option>
+                        </select>
+                        <small style="color: #666; display: block; margin-top: 5px;">
+                            Local: Data stored in browser only.<br>
+                            GitHub: Data synced across all your devices.
+                        </small>
+                    </div>
+
+                    <div id="githubFields" style="display: none;">
+                        <hr style="margin: 20px 0; border: none; border-top: 1px solid #e9ecef;">
+                        <h3 style="color: #667eea; font-size: 1.2em; margin-bottom: 15px;">GitHub Configuration</h3>
+                        
+                        <div class="form-group">
+                            <label>GitHub Username/Owner *</label>
+                            <input type="text" id="githubOwner" placeholder="e.g., yourusername">
+                            <small style="color: #666; display: block; margin-top: 5px;">
+                                Your GitHub username
+                            </small>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Repository Name *</label>
+                            <input type="text" id="githubRepo" placeholder="e.g., pawn-shop-management">
+                            <small style="color: #666; display: block; margin-top: 5px;">
+                                The repository where your app is hosted
+                            </small>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Personal Access Token *</label>
+                            <input type="password" id="githubToken" placeholder="ghp_xxxxxxxxxxxxx">
+                            <small style="color: #666; display: block; margin-top: 5px;">
+                                <a href="https://github.com/settings/tokens/new?scopes=repo&description=Pawn%20Shop%20Data%20Sync" target="_blank" style="color: #667eea;">
+                                    Create token here
+                                </a> (Select "repo" scope)
+                            </small>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Branch</label>
+                            <input type="text" id="githubBranch" placeholder="main" value="main">
+                            <small style="color: #666; display: block; margin-top: 5px;">
+                                Usually "main" or "master"
+                            </small>
+                        </div>
+
+                        <div class="info-box" style="background: #e7f3ff; padding: 15px; border-radius: 8px; border-left: 4px solid #667eea; margin: 20px 0;">
+                            <strong>ℹ️ Setup Instructions:</strong>
+                            <ol style="margin: 10px 0 0 20px; line-height: 1.8;">
+                                <li>Go to GitHub.com → Settings → Developer settings</li>
+                                <li>Click "Personal access tokens" → "Tokens (classic)"</li>
+                                <li>Generate new token with <strong>repo</strong> scope</li>
+                                <li>Copy the token and paste it above</li>
+                                <li>Save settings and click "Sync" to load data</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="closeGitHubSettings()">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save Settings</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="app-github-storage.js"></script>
+</body>
+</html>
