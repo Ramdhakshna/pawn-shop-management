@@ -7,14 +7,5 @@
     "ornamentGrams": 14,
     "principalAmount": 100000,
     "startDate": "2025-06-08"
-  },
-  {
-    "id": "1767863004805",
-    "customerId": "1767860094312",
-    "billNo": "9588",
-    "loanType": "gold",
-    "ornamentGrams": 20,
-    "principalAmount": 75000,
-    "startDate": "2025-01-12"
   }
 ]
