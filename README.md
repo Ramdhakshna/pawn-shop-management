@@ -72,10 +72,22 @@ You can also run this application locally:
 
 ## Data Storage
 
-- All data is stored locally in your browser using **localStorage**
+### Two Storage Options:
+
+#### 1. Local Storage (Default)
+- All data stored in your browser using **localStorage**
 - Data persists between browser sessions
 - Data is specific to each browser/device
-- To clear data, clear your browser's localStorage for this site
+- Works completely offline
+
+#### 2. GitHub Storage (Cross-Device Sync) ⭐ NEW!
+- Data stored in your GitHub repository
+- **Sync across all your devices** (desktop, mobile, tablet)
+- Automatic backup in GitHub
+- Access from anywhere
+- See [GITHUB_STORAGE_SETUP.md](GITHUB_STORAGE_SETUP.md) for setup instructions
+
+**Switch between modes anytime via Settings (⚙️) button**
 
 ## Browser Requirements
 

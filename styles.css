@@ -41,6 +41,31 @@ header h1 {
     word-wrap: break-word;
 }
 
+.header-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.btn-sync, .btn-settings {
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    touch-action: manipulation;
+}
+
+.btn-sync:hover, .btn-settings:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px);
+}
+
 @media (min-width: 768px) {
     header {
         padding: 30px;
@@ -49,6 +74,11 @@ header h1 {
     header h1 {
         font-size: 2.5em;
         margin-bottom: 20px;
+    }
+    
+    .btn-sync, .btn-settings {
+        padding: 10px 20px;
+        font-size: 1em;
     }
 }
 
@@ -383,10 +413,34 @@ tbody tr:last-child td {
     .form-group input[type="tel"],
     .form-group input[type="number"],
     .form-group input[type="date"],
+    .form-group input[type="password"],
     .form-group select,
     .form-group textarea {
         font-size: 16px;
     }
+}
+
+.info-box {
+    background: #e7f3ff;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid #667eea;
+    margin: 20px 0;
+    font-size: 0.95em;
+}
+
+.info-box strong {
+    color: #667eea;
+}
+
+.info-box ol {
+    margin: 10px 0 0 20px;
+    line-height: 1.8;
+}
+
+.info-box a {
+    color: #667eea;
+    text-decoration: underline;
 }
 
 .form-group input:focus,
