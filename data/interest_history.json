@@ -68,5 +68,115 @@
     "monthlyInterest": 2000,
     "accumulatedInterest": 14000,
     "capitalized": false
+  },
+  {
+    "id": 1767863006763,
+    "loanId": "1767863004805",
+    "date": "2025-01-12T00:00:00.000Z",
+    "month": 1,
+    "principal": 75000,
+    "monthlyInterest": 1500,
+    "accumulatedInterest": 1500,
+    "capitalized": false
+  },
+  {
+    "id": 1767863006764,
+    "loanId": "1767863004805",
+    "date": "2025-02-12T00:00:00.000Z",
+    "month": 2,
+    "principal": 75000,
+    "monthlyInterest": 1500,
+    "accumulatedInterest": 3000,
+    "capitalized": false
+  },
+  {
+    "id": 1767863006765,
+    "loanId": "1767863004805",
+    "date": "2025-03-12T00:00:00.000Z",
+    "month": 3,
+    "principal": 75000,
+    "monthlyInterest": 1500,
+    "accumulatedInterest": 4500,
+    "capitalized": false
+  },
+  {
+    "id": 1767863006766,
+    "loanId": "1767863004805",
+    "date": "2025-04-12T00:00:00.000Z",
+    "month": 4,
+    "principal": 75000,
+    "monthlyInterest": 1500,
+    "accumulatedInterest": 6000,
+    "capitalized": false
+  },
+  {
+    "id": 1767863006767,
+    "loanId": "1767863004805",
+    "date": "2025-05-12T00:00:00.000Z",
+    "month": 5,
+    "principal": 75000,
+    "monthlyInterest": 1500,
+    "accumulatedInterest": 7500,
+    "capitalized": false
+  },
+  {
+    "id": 1767863006768,
+    "loanId": "1767863004805",
+    "date": "2025-06-12T00:00:00.000Z",
+    "month": 6,
+    "principal": 75000,
+    "monthlyInterest": 1500,
+    "accumulatedInterest": 9000,
+    "capitalized": false
+  },
+  {
+    "id": 1767863006769,
+    "loanId": "1767863004805",
+    "date": "2025-07-12T00:00:00.000Z",
+    "month": 7,
+    "principal": 75000,
+    "monthlyInterest": 1500,
+    "accumulatedInterest": 10500,
+    "capitalized": false
+  },
+  {
+    "id": 1767863006770,
+    "loanId": "1767863004805",
+    "date": "2025-08-12T00:00:00.000Z",
+    "month": 8,
+    "principal": 75000,
+    "monthlyInterest": 1500,
+    "accumulatedInterest": 12000,
+    "capitalized": false
+  },
+  {
+    "id": 1767863006771,
+    "loanId": "1767863004805",
+    "date": "2025-09-12T00:00:00.000Z",
+    "month": 9,
+    "principal": 75000,
+    "monthlyInterest": 1500,
+    "accumulatedInterest": 13500,
+    "capitalized": false
+  },
+  {
+    "id": 1767863006772,
+    "loanId": "1767863004805",
+    "date": "2025-10-12T00:00:00.000Z",
+    "month": 10,
+    "principal": 75000,
+    "monthlyInterest": 1500,
+    "accumulatedInterest": 15000,
+    "capitalized": false
+  },
+  {
+    "id": 1767863006773,
+    "loanId": "1767863004805",
+    "date": "2025-11-12T00:00:00.000Z",
+    "month": 11,
+    "principal": 75000,
+    "monthlyInterest": 1500,
+    "accumulatedInterest": 16500,
+    "capitalized": false
   }
 ]
